@@ -3,7 +3,7 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Movie from "./components/Movie";
 import FavMovie from "./components/FavMovie";
 import { useSelector, useDispatch } from "react-redux";
-import { SONRAKI_FILM, ONCEKI_FILM } from "./store/actions";
+import { SONRAKI_FILM, ONCEKI_FILM, FAV_EKLE } from "./store/actions";
 
 function App() {
   //const [sira, setSira] = useState(0);
@@ -21,6 +21,10 @@ function App() {
     kargocuDisp({
       type: ONCEKI_FILM,
     });
+  }
+
+  function listeEkle() {
+    kargocuDisp({ type: FAV_EKLE });
   }
 
   return (
@@ -59,7 +63,10 @@ function App() {
             >
               Sıradaki
             </button>
-            <button className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white">
+            <button
+              onClick={listeEkle}
+              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+            >
               Listeme ekle
             </button>
           </div>

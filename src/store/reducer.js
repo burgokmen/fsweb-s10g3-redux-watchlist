@@ -1,5 +1,5 @@
 import { movies } from "../movies";
-import { SONRAKI_FILM, ONCEKI_FILM } from "./actions";
+import { SONRAKI_FILM, ONCEKI_FILM, FAV_EKLE, FAV_SIL } from "./actions";
 
 const initalState = {
   movies: movies,
@@ -46,6 +46,25 @@ const reducer = (state = initalState, action) => {
           sira: state.movies.length - 1,
         };
       }
+
+    case FAV_EKLE:
+      return {
+        ...state,
+        favoriFilmler: [...state.favoriFilmler, state.movies[state.sira]],
+        movies: state.movies.filter(
+          (m) => m.id !== state.movies[state.sira].id
+        ),
+        sira: state.sira === 0 ? 0 : state.sira - 1,
+      };
+    /*     case FAV_SIL:
+      return {
+        ...state,
+        favoriFilmler: [...state.favoriFilmler, state.movies[state.sira]],
+        movies: state.movies.filter(
+          (m) => m.id !== state.movies[state.sira].id
+        ),
+        sira: state.sira === 0 ? 0 : state.sira - 1,
+      }; */
 
     default:
       return state;
