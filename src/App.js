@@ -1,15 +1,26 @@
-import { useState } from "react";
+//import { useState } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Movie from "./components/Movie";
 import FavMovie from "./components/FavMovie";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { SONRAKI_FILM, ONCEKI_FILM } from "./store/actions";
 
 function App() {
-  const [sira, setSira] = useState(0);
+  //const [sira, setSira] = useState(0);
+  const kargocuDisp = useDispatch();
+  const sira = useSelector((store) => store.sira);
+
   const favMovies = useSelector((store) => store.favoriFilmler);
 
   function sonrakiFilm() {
-    setSira(sira + 1);
+    kargocuDisp({
+      type: SONRAKI_FILM,
+    });
+  }
+  function oncekiFilm() {
+    kargocuDisp({
+      type: ONCEKI_FILM,
+    });
   }
 
   return (
@@ -36,6 +47,12 @@ function App() {
           <Movie sira={sira} />
 
           <div className="flex gap-3 justify-end py-3">
+            <button
+              onClick={oncekiFilm}
+              className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
+            >
+              Onceki
+            </button>
             <button
               onClick={sonrakiFilm}
               className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
