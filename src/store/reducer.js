@@ -56,15 +56,17 @@ const reducer = (state = initalState, action) => {
         ),
         sira: state.sira === 0 ? 0 : state.sira - 1,
       };
-    /*     case FAV_SIL:
+    case FAV_SIL:
+      const silinecekFilm = state.favoriFilmler.filter(
+        (f) => f.id === action.payload
+      );
       return {
         ...state,
-        favoriFilmler: [...state.favoriFilmler, state.movies[state.sira]],
-        movies: state.movies.filter(
-          (m) => m.id !== state.movies[state.sira].id
+        favoriFilmler: state.favoriFilmler.filter(
+          (f) => f.id !== action.payload
         ),
-        sira: state.sira === 0 ? 0 : state.sira - 1,
-      }; */
+        movies: [...state.movies, silinecekFilm],
+      };
 
     default:
       return state;
